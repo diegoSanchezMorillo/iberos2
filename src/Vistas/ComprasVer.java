@@ -325,15 +325,17 @@ public class ComprasVer extends javax.swing.JFrame {
         proveedor = compra.getProveedores();
         comprasMod.jTextFieldNombre.setText(proveedor.getNombre());
         comprasMod.jTextFieldIdentificacion.setText(proveedor.getIdentificacion());
+        comprasMod.jTextFieldReferencia1.setText(compra.getReferencia());
         
          DefaultTableModel tabla2 = new DefaultTableModel();
          tabla2 = (DefaultTableModel) comprasMod.jTableProductos.getModel();
-                Vector datos2 = new Vector();
+                
                 productos = compra.getTienes();
           
                 if(productos.size()>0){
                    Iterator<Tiene> it = productos.iterator();
                     while( it.hasNext()) {
+                     Vector datos2 = new Vector();
                     tiene = it.next(); 
                     tieneId = tiene.getId();
                     producto.setIdproductos(tieneId.getIdproductos());

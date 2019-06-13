@@ -318,16 +318,16 @@ public class VentasVer extends javax.swing.JFrame {
         cliente = venta.getClientes();
         ventasMod.jTextFieldNombre.setText(cliente.getNombre());
         ventasMod.jTextFieldIdentificacion.setText(cliente.getIdentificacion());
-        
+        ventasMod.jTextFieldReferencia1.setText(venta.getReferencia());
          DefaultTableModel tabla2 = new DefaultTableModel();
          tabla2 = (DefaultTableModel) ventasMod.jTableProductos.getModel();
-                Vector datos2 = new Vector();
+                
                 productos = venta.getContienes();
-          
                 if(productos.size()>0){
                    Iterator<Contiene> it = productos.iterator();
                     while( it.hasNext()) {
-                    contiene = it.next(); 
+                        Vector datos2 = new Vector();
+                    contiene = it.next();
                     contieneId = contiene.getId();
                     producto.setIdproductos(contieneId.getIdproductos());
                     idProduc = producto.getIdproductos();

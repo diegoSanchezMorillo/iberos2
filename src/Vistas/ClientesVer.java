@@ -138,7 +138,7 @@ public class ClientesVer extends javax.swing.JFrame {
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/logoPequeño.png"))); // NOI18N
 
-        jButtonBuscar.setText("Buscar");
+        jButtonBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Lupa-pequeña.png"))); // NOI18N
         jButtonBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonBuscarActionPerformed(evt);

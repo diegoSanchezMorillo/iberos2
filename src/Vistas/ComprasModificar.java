@@ -497,6 +497,6 @@ public class ComprasModificar extends javax.swing.JFrame {
     public static javax.swing.JTextField jTextFieldNombre;
     public static javax.swing.JTextField jTextFieldProducto;
     private javax.swing.JTextField jTextFieldReferencia;
-    private javax.swing.JTextField jTextFieldReferencia1;
+    public javax.swing.JTextField jTextFieldReferencia1;
     // End of variables declaration//GEN-END:variables
 }

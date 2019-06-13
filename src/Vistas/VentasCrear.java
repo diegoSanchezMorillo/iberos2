@@ -342,7 +342,7 @@ public class VentasCrear extends javax.swing.JFrame {
                     contiene = new Contiene(contieneId,producto,venta,producto.getCantidad());
                     operacionVenta.guardaContiene(contiene);
                     prodMod = operacionProducto.seleccionaProducto(producto);
-                    System.out.print(prodMod);
+                    
                     prodMod.setCantidad(prodMod.getCantidad()-producto.getCantidad());
                     operacionProducto.actualizaCantidadProducto(prodMod);
                     }

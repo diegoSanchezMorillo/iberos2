@@ -16,7 +16,15 @@ import Modelos.ContieneId;
 import Modelos.Productos;
 import Modelos.Proveedores;
 import Modelos.Ventas;
+import static Vistas.VentasCrear.cliente;
+import static Vistas.VentasCrear.contieneId;
+import static Vistas.VentasCrear.jTable1;
+import static Vistas.VentasCrear.producto;
+import static Vistas.VentasCrear.venta;
 import java.sql.Connection;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -45,10 +53,12 @@ public class VentasModificar extends javax.swing.JFrame {
     public static Ventas venta = new Ventas();
     public static Productos producto = new Productos();
     public static Clientes cliente = new Clientes();
+    Contiene contiene = new Contiene();
     OperacionesVentas operaciones = new OperacionesVentas();
-    Set<Contiene> productos = new HashSet<>();
+    Set<Productos> productos = new HashSet<>();
     public int id;
     Long total = null;
+    int cantidad;
     
     
     /**
@@ -168,6 +178,11 @@ public class VentasModificar extends javax.swing.JFrame {
         jButton4.setBackground(new java.awt.Color(255, 0, 51));
         jButton4.setForeground(new java.awt.Color(255, 255, 255));
         jButton4.setText("Eliminar renglon");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton5.setBackground(new java.awt.Color(0, 153, 255));
         jButton5.setForeground(new java.awt.Color(255, 255, 255));
@@ -324,43 +339,58 @@ public class VentasModificar extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        /**
-        int cantidad = (int) jSpinnerCantidad.getValue();
+        
+        cantidad = (int) jSpinnerCantidad.getValue();
         Long precio = producto.getPrecioVenta();
         Long precioTotal = null;
         precioTotal = precio * cantidad;
        
          DefaultTableModel tabla = new DefaultTableModel();
-         tabla = (DefaultTableModel) jTableProductos.getModel();
-                productos.add((Productos) producto.getContienes());
+         tabla = (DefaultTableModel) jTable1.getModel();
+
                 Vector datos = new Vector();
-                datos.add(productos.add((Productos) producto.getContienes()));
+                datos.add(producto.getReferencia());
                 datos.add(producto.getDescripcion());
                 datos.add(cantidad);
                 datos.add(precio);
+                producto.setCantidad(cantidad);
                 datos.add(precioTotal);
                 tabla.addRow(datos);
+                
                 
                 if(total==null){
                     total =  precioTotal;
                 }else{
                     total = total + precioTotal;
                 }
-
                 jLabelTotal.setText(String.valueOf(total));
-                
                 productos.add(producto);
-                **/
+                venta.setContienes(productos);
+                
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-       /** OperacionesVentas operacionVenta = new OperacionesVentas();
-        venta = new Ventas(cliente,referencia,total);
-        venta.setContienes(productos);
-        
-        
-        operacionVenta.guardaVenta(venta);**/
+      OperacionesVentas operacionVenta = new OperacionesVentas();
+        OperacionesProductos operacionProducto = new OperacionesProductos();
+        Productos prodMod = new Productos();
+        Date date = new Date();
+        String referencia = jTextFieldReferencia.getText();
+        DateFormat hourdateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        String fecha = hourdateFormat.format(date);
+        venta = new Ventas(cliente,referencia,total,date);
+        operacionVenta.actualizaVenta(venta);
+        Iterator<Productos> it = productos.iterator();
+                    while( it.hasNext()) {
+                    producto = it.next(); 
+                    contieneId = new ContieneId(venta.getIdventas(),producto.getIdproductos());
+                    contiene = new Contiene(contieneId,producto,venta,producto.getCantidad());
+                    operacionVenta.actualizaContiene(contiene);
+                    prodMod = operacionProducto.seleccionaProducto(producto);
+                    
+                    prodMod.setCantidad(prodMod.getCantidad()-producto.getCantidad());
+                    operacionProducto.actualizaCantidadProducto(prodMod);
+                    }
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -383,6 +413,16 @@ public class VentasModificar extends javax.swing.JFrame {
             Logger.getLogger(VentasModificar.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        int fila;
+        
+        DefaultTableModel tabla = new DefaultTableModel();
+         tabla = (DefaultTableModel) jTableProductos.getModel();
+         fila = (Integer) this.jTableProductos.getSelectedRow();
+         tabla.removeRow(fila); 
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     
      private void cargarTabla(){
@@ -485,6 +525,6 @@ public class VentasModificar extends javax.swing.JFrame {
     public static javax.swing.JTextField jTextFieldNombre;
     public static javax.swing.JTextField jTextFieldProducto;
     private javax.swing.JTextField jTextFieldReferencia;
-    private javax.swing.JTextField jTextFieldReferencia1;
+    public javax.swing.JTextField jTextFieldReferencia1;
     // End of variables declaration//GEN-END:variables
 }

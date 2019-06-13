@@ -6,6 +6,7 @@
 package Vistas;
 
 import Controladores.OperacionesCompras;
+import Controladores.OperacionesProductos;
 import Controladores.OperacionesVentas;
 import Modelos.Clientes;
 import Modelos.Compras;
@@ -17,6 +18,7 @@ import Modelos.Tiene;
 import Modelos.TieneId;
 import Modelos.Ventas;
 import static Vistas.ComprasVer.compra;
+import static Vistas.VentasCrear.producto;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -326,12 +328,14 @@ public class ComprasCrear extends javax.swing.JFrame {
                 productos.add(producto);
                 compra.setTienes(productos);
                 
-                //contiene = new Contiene(producto.getIdproductos(),venta.getIdventas(),cantidad);
+               
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
         OperacionesCompras operacionCompra= new OperacionesCompras();
+        OperacionesProductos operacionProducto = new OperacionesProductos();
+        Productos prodMod = new Productos();
         
         Date date = new Date();
         String referencia = jTextFieldReferencia.getText();
@@ -345,6 +349,11 @@ public class ComprasCrear extends javax.swing.JFrame {
                     tieneId = new TieneId(compra.getIdcompras(),producto.getIdproductos());
                     tiene = new Tiene(tieneId,compra,producto,producto.getCantidad());
                     operacionCompra.guardaTiene(tiene);
+                    
+                    prodMod = operacionProducto.seleccionaProducto(producto);
+                    
+                    prodMod.setCantidad(prodMod.getCantidad()+producto.getCantidad());
+                    operacionProducto.actualizaCantidadProducto(prodMod);
                     }
         this.dispose();
         

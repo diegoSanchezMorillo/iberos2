@@ -107,8 +107,17 @@ public class OperacionesVentas {
         iniciaOperacion();        
         sesion.update(venta);       
         terminaOperacion();
-        JOptionPane.showMessageDialog(null, "Venta modificada correctamente");
+        
         return id;
+    }
+    
+     public void actualizaContiene(Contiene contiene){
+        
+        iniciaOperacion();
+        sesion.update(contiene);
+        terminaOperacion();
+        JOptionPane.showMessageDialog(null, "Venta creada correctamente");
+        
     }
 
     

@@ -140,7 +140,7 @@ public class CategoriasVer extends javax.swing.JFrame {
             }
         });
 
-        jButtonBuscar.setText("Buscar");
+        jButtonBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Lupa-pequeña.png"))); // NOI18N
         jButtonBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonBuscarActionPerformed(evt);
