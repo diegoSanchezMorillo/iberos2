@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 10-jun-2019 1:48:47 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Modelos.Tiene" table="tiene" catalog="iberos2" optimistic-lock="version">
+        <composite-id name="id" class="Modelos.TieneId">
+            <key-property name="idcompras" type="int">
+                <column name="idcompras" />
+            </key-property>
+            <key-property name="idproductos" type="int">
+                <column name="idproductos" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="compras" class="Modelos.Compras" update="false" insert="false" fetch="select">
+            <column name="idcompras" not-null="true" />
+        </many-to-one>
+        <many-to-one name="productos" class="Modelos.Productos" update="false" insert="false" fetch="select">
+            <column name="idproductos" not-null="true" />
+        </many-to-one>
+        <property name="cantidad" type="int">
+            <column name="cantidad" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

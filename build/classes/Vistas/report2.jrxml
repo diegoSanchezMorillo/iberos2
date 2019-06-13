@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="da5e69b8-758d-495a-acad-5a5c07e92dd6">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="id" class="java.lang.Integer"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     compras.`idcompras` AS compras_idcompras,
+     compras.`referencia` AS compras_referencia,
+     compras.`importe` AS compras_importe,
+     compras.`create_time` AS compras_create_time,
+     compras.`idproveedores` AS compras_idproveedores,
+     tiene.`idcompras` AS tiene_idcompras,
+     tiene.`idproductos` AS tiene_idproductos,
+     tiene.`cantidad` AS tiene_cantidad,
+     productos.`idproductos` AS productos_idproductos,
+     productos.`referencia` AS productos_referencia,
+     productos.`descripcion` AS productos_descripcion,
+     productos.`precio_compra` AS productos_precio_compra,
+     productos.`precio_venta` AS productos_precio_venta,
+     productos.`cantidad` AS productos_cantidad,
+     productos.`idproveedores` AS productos_idproveedores,
+     productos.`idcategorias` AS productos_idcategorias,
+     proveedores.`idproveedores` AS proveedores_idproveedores,
+     proveedores.`nombre` AS proveedores_nombre,
+     proveedores.`direccion` AS proveedores_direccion,
+     proveedores.`identificacion` AS proveedores_identificacion,
+     proveedores.`poblacion` AS proveedores_poblacion,
+     proveedores.`cod_postal` AS proveedores_cod_postal,
+     proveedores.`telefono` AS proveedores_telefono,
+     proveedores.`email` AS proveedores_email
+FROM
+     `compras` compras INNER JOIN `tiene` tiene ON compras.`idcompras` = tiene.`idcompras`
+     INNER JOIN `productos` productos ON tiene.`idproductos` = productos.`idproductos`
+     INNER JOIN `proveedores` proveedores ON compras.`idproveedores` = proveedores.`idproveedores`
+WHERE
+     compras.`idcompras`= $P{id}]]>
+	</queryString>
+	<field name="compras_referencia" class="java.lang.String"/>
+	<field name="compras_importe" class="java.math.BigDecimal"/>
+	<field name="productos_referencia" class="java.lang.String"/>
+	<field name="productos_descripcion" class="java.lang.String"/>
+	<field name="tiene_cantidad" class="java.lang.Integer"/>
+	<field name="productos_precio_venta" class="java.math.BigDecimal"/>
+	<field name="proveedores_nombre" class="java.lang.String"/>
+	<field name="proveedores_direccion" class="java.lang.String"/>
+	<field name="proveedores_identificacion" class="java.lang.String"/>
+	<field name="proveedores_poblacion" class="java.lang.String"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="101">
+			<frame>
+				<reportElement mode="Opaque" x="83" y="-20" width="492" height="121" backcolor="#006699" uuid="a131048a-85c2-4e8d-9d5c-3aaf37eca136"/>
+				<staticText>
+					<reportElement x="17" y="20" width="266" height="43" forecolor="#FFFFFF" uuid="735d1fdc-d770-42fd-ba4e-1c653c21633b"/>
+					<textElement>
+						<font size="34" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Factura Compra]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="288" y="20" width="100" height="43" forecolor="#FFFFFF" uuid="8a2dfe14-fa47-4523-80c6-fa366cdd785d"/>
+					<textElement>
+						<font size="32" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{compras_referencia}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="17" y="74" width="100" height="20" forecolor="#FFFFFF" uuid="fc8286a1-1d41-4022-b983-8546147605ef"/>
+					<textFieldExpression><![CDATA[$F{proveedores_nombre}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="137" y="74" width="100" height="20" forecolor="#FFFFFF" uuid="bb15654f-7857-4231-ab9b-b14918ab50df"/>
+					<textFieldExpression><![CDATA[$F{proveedores_identificacion}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="257" y="74" width="100" height="20" forecolor="#FFFFFF" uuid="cf711904-5c71-46e3-9944-4bab3bce9cf8"/>
+					<textFieldExpression><![CDATA[$F{proveedores_direccion}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="372" y="74" width="100" height="20" forecolor="#FFFFFF" uuid="08bd8631-91b9-455b-8bf0-a622aba6f44a"/>
+					<textFieldExpression><![CDATA[$F{proveedores_poblacion}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<image>
+				<reportElement x="-20" y="-10" width="103" height="110" uuid="e7d25bf8-12bd-4eea-9f1d-6b89a6f06aa5"/>
+				<imageExpression><![CDATA["C:\\Users\\Diego\\Documents\\NetBeansProjects\\iberos2\\src\\img\\logoDefinitivo.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="13"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21">
+			<line>
+				<reportElement x="-20" y="20" width="595" height="1" forecolor="#666666" uuid="733a6cdb-6f84-4193-a1fd-17fcf2ea9f0a"/>
+			</line>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="110" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="6abf1caa-5f68-4c19-99a0-50f3c3b01d8b"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Referencia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="110" y="0" width="157" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="7a0953eb-d039-4cc8-9c93-55313dd171c5"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descripción]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="267" y="0" width="88" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="b948006b-64dc-4865-96aa-8cf0580145d3"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[cantidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="355" y="1" width="85" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="b4b9213b-0164-4a8b-8879-9d2a09f726e9"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Precio Und.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="440" y="0" width="115" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="d0efa703-b907-49f5-9623-d9eb8422e37c"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total línea]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="19" width="555" height="1" uuid="3cdcf73f-957c-4893-ba60-9c2eecdf9a34"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="165" y="0" width="55" height="20" uuid="39e53aca-1982-432d-8e26-10f9b9f2a969"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{productos_descripcion}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="265" y="0" width="88" height="20" uuid="944fd54b-501a-44b9-892f-6dbc929a3e25"/>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tiene_cantidad}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="355" y="0" width="85" height="20" uuid="645ebad3-380a-4615-94e7-874a00db9f0b"/>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{productos_precio_venta}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="1" y="0" width="110" height="20" uuid="40c795bc-731f-4f34-9f1c-e7088b1c2ea4"/>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{productos_referencia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="0" width="115" height="20" uuid="22fe125a-f565-45b0-8cf2-254774492c72"/>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tiene_cantidad}*$F{productos_precio_venta}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="58">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="44" width="515" height="13" backcolor="#E6E6E6" uuid="47dc9dd8-e4da-4df3-88a4-5782e0b6ee93"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="515" y="44" width="40" height="13" backcolor="#E6E6E6" uuid="822cbbff-5fc2-4070-9095-d439bc349b9d"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="44" width="100" height="13" uuid="c6d4fed8-2079-48ef-a6bc-ab6be5078bec"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="500" y="12" width="55" height="20" uuid="5ef4efc2-694f-40e5-9d8d-b4d8f0168a6f"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{compras_importe}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="440" y="12" width="43" height="20" uuid="31795bb9-cd08-4e1b-bf14-491e898d2bb6"/>
+				<textElement>
+					<font size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total:]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

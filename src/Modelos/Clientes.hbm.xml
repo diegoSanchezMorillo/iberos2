@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 04-jun-2019 19:38:10 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Modelos.Clientes" table="clientes" catalog="iberos2" optimistic-lock="version">
+        <id name="idclientes" type="java.lang.Integer">
+            <column name="idclientes" />
+            <generator class="identity" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="45" />
+        </property>
+        <property name="apellidos" type="string">
+            <column name="apellidos" length="45" />
+        </property>
+        <property name="identificacion" type="string">
+            <column name="identificacion" length="45" unique="true" />
+        </property>
+        <property name="direccion" type="string">
+            <column name="direccion" length="45" />
+        </property>
+        <property name="poblacion" type="string">
+            <column name="poblacion" length="45" />
+        </property>
+        <property name="codPostal" type="java.lang.Integer">
+            <column name="cod_postal" />
+        </property>
+        <property name="telefono" type="java.lang.Integer">
+            <column name="telefono" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="45" />
+        </property>
+        <property name="tipoCliente" type="string">
+            <column name="tipo_cliente" length="45" />
+        </property>
+        <set name="ventases" table="ventas" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idclientes" not-null="true" />
+            </key>
+            <one-to-many class="Modelos.Ventas" />
+        </set>
+    </class>
+</hibernate-mapping>

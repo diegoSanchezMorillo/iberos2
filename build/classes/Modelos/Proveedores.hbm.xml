@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 10-jun-2019 1:48:47 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Modelos.Proveedores" table="proveedores" catalog="iberos2" optimistic-lock="version">
+        <id name="idproveedores" type="java.lang.Integer">
+            <column name="idproveedores" />
+            <generator class="identity" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="45" />
+        </property>
+        <property name="direccion" type="string">
+            <column name="direccion" length="45" />
+        </property>
+        <property name="identificacion" type="string">
+            <column name="identificacion" length="45" unique="true" />
+        </property>
+        <property name="poblacion" type="string">
+            <column name="poblacion" length="45" />
+        </property>
+        <property name="codPostal" type="java.lang.Integer">
+            <column name="cod_postal" />
+        </property>
+        <property name="telefono" type="java.lang.Integer">
+            <column name="telefono" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="45" />
+        </property>
+        <set name="productoses" table="productos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idproveedores" not-null="true" />
+            </key>
+            <one-to-many class="Modelos.Productos" />
+        </set>
+        <set name="comprases" table="compras" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idproveedores" not-null="true" />
+            </key>
+            <one-to-many class="Modelos.Compras" />
+        </set>
+    </class>
+</hibernate-mapping>

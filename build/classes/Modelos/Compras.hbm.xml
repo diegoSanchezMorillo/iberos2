@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 10-jun-2019 1:48:47 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Modelos.Compras" table="compras" catalog="iberos2" optimistic-lock="version">
+        <id name="idcompras" type="java.lang.Integer">
+            <column name="idcompras" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="proveedores" class="Modelos.Proveedores" lazy="false" fetch="select">
+            <column name="idproveedores" not-null="true" />
+        </many-to-one>
+        <property name="referencia" type="string">
+            <column name="referencia" not-null="true" />
+        </property>
+        <property name="importe" type="java.lang.Long">
+            <column name="importe" precision="10" scale="0" />
+        </property>
+        <property name="createTime" type="timestamp">
+            <column name="create_time" length="19" />
+        </property>
+        <set name="tienes" table="tiene" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="idcompras" not-null="true" />
+            </key>
+            <one-to-many class="Modelos.Tiene" />
+        </set>
+    </class>
+</hibernate-mapping>
